@@ -1,0 +1,14 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import sys
+n = int(input())
+phones = {}
+
+for _ in range(n):
+    name , phone = input().split()
+    phones[name] = phone
+
+for x in sys.stdin:
+    x = x.strip()
+    if x in phones:
+        print(x + "=" +phones[x])
+    else:print("Not found")
