@@ -1,0 +1,18 @@
+class Solution:
+    def maximumSubarraySum(self, nums: List[int], k: int) -> int:
+        freq = defaultdict(int)
+        wsum = 0
+        msum = 0
+        left = 0
+        for right in range(len(nums)):
+            freq[nums[right]] +=1
+            wsum += nums[right]
+            if right - left +1 ==k:
+                if len(freq) == k:
+                    msum = max(msum , wsum)
+                wsum -= nums[left]
+                freq[nums[left]] -= 1 
+                if freq[nums[left]] == 0:
+                    del freq[nums[left]]
+                left+=1
+        return msum
