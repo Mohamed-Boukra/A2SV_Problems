@@ -1,0 +1,20 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        m = len(s)
+        n = len(p)
+        if n > m :
+            return []
+        pfreq = Counter(p)
+        wfreq = Counter(s[:n])
+        result = []
+        if wfreq == pfreq :
+            result.append(0)
+        for i in range(n, m):
+            wfreq[s[i]] +=1
+            c = s[i-n]
+            wfreq[c] -=1
+            if wfreq[c] == 0:
+                del wfreq[c]
+            if wfreq == pfreq :
+                result.append(i-n+1)
+        return result 
