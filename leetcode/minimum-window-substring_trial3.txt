@@ -1,0 +1,26 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        tfreq = Counter(t)
+        wfreq = defaultdict(int)
+        done = 0
+        nbnotdone = len(tfreq)
+        left = 0
+        result = ""
+        min_len = float("inf")
+        for right in range(len(s)):
+            c = s[right]
+            wfreq[c] +=1
+            if c in tfreq and wfreq[c] == tfreq[c]:
+                done +=1
+            while done == nbnotdone:
+                if right - left + 1 < min_len:
+                    min_len = right - left + 1
+                    result = s[left:right+1]
+                lchar = s[left]
+                wfreq[lchar] -=1
+                if lchar in tfreq and wfreq[lchar] < tfreq[lchar]:
+                    done -=1
+                left +=1
+        return result 
+
+
