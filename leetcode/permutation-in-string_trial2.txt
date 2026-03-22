@@ -1,0 +1,17 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        k = len(s1)
+        if k > len(s2):
+            return False
+        s1freq = Counter(s1)
+        wfreq = Counter(s2[:k])
+        if wfreq == s1freq:
+            return True
+        for r in range(k, len(s2)):
+            wfreq[s2[r]] +=1
+            wfreq[s2[r-k]] -=1
+            if wfreq[s2[r-k]] == 0:
+                del wfreq[s2[r-k]]
+            if wfreq == s1freq:
+                return True
+        return False
