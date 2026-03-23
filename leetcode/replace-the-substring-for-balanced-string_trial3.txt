@@ -1,0 +1,15 @@
+class Solution:
+    def balancedString(self, s: str) -> int:
+        count = Counter(s)
+        n = len(s)
+        if all(count[c] == n//4 for c in "QWER"):
+            return 0
+        l = 0
+        result = n
+        for r in range(n):
+            count[s[r]] -= 1
+            while l <= r and all(count[c] <= n//4 for c in "QWER"): 
+                result = min(result, r-l+1)
+                count[s[l]] +=1
+                l+=1
+        return result
