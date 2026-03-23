@@ -1,0 +1,14 @@
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        avgs = [-1] * n
+        window = 2 * k + 1
+        if window > n:
+            return avgs
+        currsum = sum(nums[:window])
+        for i in range(k, n-k):
+            if i > k:
+                currsum += nums[i+k]
+                currsum -= nums[i-k-1]
+            avgs[i] = currsum // window
+        return avgs
