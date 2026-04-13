@@ -1,0 +1,23 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        halfsum = []
+        fast = head
+        slow = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        while slow:
+            halfsum.append(slow.val)
+            slow = slow.next
+        curr = head
+        result = float('-inf')
+        while halfsum:
+            twin = halfsum.pop()
+            result = max(result , twin+curr.val)
+            curr = curr.next
+        return result
