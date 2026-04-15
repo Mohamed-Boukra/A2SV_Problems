@@ -1,0 +1,9 @@
+class Solution:
+    def minOperations(self, logs: List[str]) -> int:
+        answer = 0
+        for op in logs:
+            if op == "../":
+                answer -= 1 if answer > 0 else 0
+            elif op == "./": continue
+            else : answer +=1
+        return answer
