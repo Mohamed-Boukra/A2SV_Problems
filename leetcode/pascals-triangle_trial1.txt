@@ -1,0 +1,9 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        if numRows == 1:
+            return [[1]]
+        prev_triangle = self.generate(numRows - 1)
+        prev = prev_triangle[-1]
+
+        new_row = [1]+[prev[i] + prev[i+1] for i in range(len(prev)-1)]+[1]
+        return prev_triangle + [new_row]
