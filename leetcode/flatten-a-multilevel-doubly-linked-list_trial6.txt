@@ -1,0 +1,28 @@
+class Solution:
+    def flatten(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        curr = head 
+        while curr:
+            if curr.child:
+                child_head = curr.child
+                self.flatten(child_head)
+
+                child_tail = child_head
+                while child_tail.next:
+                    child_tail = child_tail.next
+
+                next_node = curr.next
+
+                curr.next = child_head
+                child_head.prev = curr
+                curr.child = None
+                
+                child_tail.next = next_node
+
+                if next_node:
+                    next_node.prev = child_tail
+                curr = next_node
+            else:
+                curr = curr.next
+        return head
